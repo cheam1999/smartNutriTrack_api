@@ -1,0 +1,9 @@
+### Get Recipe
+GET http://127.0.0.1:8000/api/get_barcode_products/5449000000996 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+### Get all barcode product
+GET http://127.0.0.1:8000/api/get_all  HTTP/1.1
+Accept: application/json
+Content-Type: application/json

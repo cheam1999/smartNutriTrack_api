@@ -1,5 +1,31 @@
-### Get Recipe
-GET http://127.0.0.1:8000/api/get_barcode_products/5449000000996 HTTP/1.1
+### Sign up
+POST http://localhost:8000/api/register HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+    "name": "test",
+    "email": "test@test.com",
+    "password": "12345678"
+}
+
+### Sign in
+POST http://127.0.0.1:8030/api/login HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+    "email": "test@test.com",
+    "password": "12345678"
+}
+### me
+POST http://127.0.0.1:8000/api/me HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 21|UU0nm8BZcAxxHGdyzLG0cCh8YsLglR9AB993XWob
+
+### Get Barcode product
+GET http://127.0.0.1:8030/api/get_barcode_products/5449000000996 HTTP/1.1
 Accept: application/json
 Content-Type: application/json
 
@@ -7,3 +33,41 @@ Content-Type: application/json
 GET http://127.0.0.1:8000/api/get_all  HTTP/1.1
 Accept: application/json
 Content-Type: application/json
+
+### Save meal
+POST http://127.0.0.1:8030/api/save_meal HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 21|UU0nm8BZcAxxHGdyzLG0cCh8YsLglR9AB993XWob
+
+{
+    "meal": "breakfast",
+    "intake_serving_size": "500",
+    "food_id": "3"
+}
+
+### get current meals
+GET http://127.0.0.1:8030/api/get_current_meals HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 21|UU0nm8BZcAxxHGdyzLG0cCh8YsLglR9AB993XWob
+
+
+### get daily summary
+GET http://127.0.0.1:8030/api/get_daily_summary HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 21|UU0nm8BZcAxxHGdyzLG0cCh8YsLglR9AB993XWob
+
+
+### get weekly summary
+GET http://127.0.0.1:8030/api/get_weekly_summary HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 21|UU0nm8BZcAxxHGdyzLG0cCh8YsLglR9AB993XWob
+
+### get weekly summary
+POST http://127.0.0.1:8030/api/get_diabetes/70.2 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 21|UU0nm8BZcAxxHGdyzLG0cCh8YsLglR9AB993XWob

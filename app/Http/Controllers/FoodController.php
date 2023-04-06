@@ -1,24 +1,23 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\BarcodeProducts;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class BarcodeProductsController extends Controller
+use Illuminate\Http\Request;
+use DB;
+
+class FoodController extends Controller
 {
     public function index()
     {
-        return BarcodeProducts::all();
+        return Food::all();
     }
 
     public function show(string $code)
     {
-        $scanned_food = DB::table('barcode_products')
+        $scanned_food = DB::table('food')
                     ->where('food_code', '=', $code)
                     ->get();
 
         return $scanned_food;
     }
-
 }

@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+pydantic
+pickle5
+scikit-learn
+numpy
+scikit-fuzzy
+matplotlib
+imblearn
+pandas

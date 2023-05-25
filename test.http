@@ -1,5 +1,5 @@
 ### Sign up
-POST http://localhost:8000/api/register HTTP/1.1
+POST http://localhost:8030/api/register HTTP/1.1
 Accept: application/json
 Content-Type: application/json
 
@@ -38,7 +38,7 @@ Content-Type: application/json
 POST http://127.0.0.1:8030/api/save_meal HTTP/1.1
 Accept: application/json
 Content-Type: application/json
-Authorization: Bearer 21|UU0nm8BZcAxxHGdyzLG0cCh8YsLglR9AB993XWob
+Authorization: Bearer 26|hysv3CTWqSrkdEnK20vNyOjOqhhxohfxb04jjmcU
 
 {
     "meal": "breakfast",
@@ -50,7 +50,8 @@ Authorization: Bearer 21|UU0nm8BZcAxxHGdyzLG0cCh8YsLglR9AB993XWob
 GET http://127.0.0.1:8030/api/get_current_meals HTTP/1.1
 Accept: application/json
 Content-Type: application/json
-Authorization: Bearer 21|UU0nm8BZcAxxHGdyzLG0cCh8YsLglR9AB993XWob
+Authorization: Bearer 26|hysv3CTWqSrkdEnK20vNyOjOqhhxohfxb04jjmcU
+
 
 
 ### get daily summary
@@ -58,6 +59,12 @@ GET http://127.0.0.1:8030/api/get_daily_summary HTTP/1.1
 Accept: application/json
 Content-Type: application/json
 Authorization: Bearer 21|UU0nm8BZcAxxHGdyzLG0cCh8YsLglR9AB993XWob
+
+### get current meals
+GET http://127.0.0.1:8030/api/get_current_meals HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 26|hysv3CTWqSrkdEnK20vNyOjOqhhxohfxb04jjmcU
 
 
 ### get weekly summary
@@ -71,3 +78,45 @@ POST http://127.0.0.1:8030/api/get_diabetes/70.2 HTTP/1.1
 Accept: application/json
 Content-Type: application/json
 Authorization: Bearer 21|UU0nm8BZcAxxHGdyzLG0cCh8YsLglR9AB993XWob
+
+###
+GET http://127.0.0.1:8030/api/get_recipe HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+### Create Recipe
+POST http://127.0.0.1:8030/api/create_recipe HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+    "recipe_name": "Pineapple Tarts",
+    "recipe_ingredients": "flour, corn starch, salt, icing sugar, unsalted butter, egg yolks, condensed milk, pineapple jam, sugar",
+    "recipe_instructions": "If you are using canned pineapple slices, drain the pineapple slices and then squeeze the extra water/juice with your hands. Blend the canned pineapples until they are mushy, about 10 seconds. If you use fresh pineapples, remove the skin, cut into pieces and blend for 10 seconds.",
+    "recipe_source": "https://rasamalaysia.com/recipe-pineapple-tarts/",
+
+}
+
+### create user recipe
+POST http://127.0.0.1:8030/api/create_user_recipe HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 1|M0o51lPkpM5RHrGNF7wtmKx7Oa48N0SKS0vldqYB
+
+{
+    "ur_breakfast": "1",
+    "ur_lunch": "2",
+    "ur_snacks": "3",
+    "ur_dinner": "4"
+
+}
+
+###
+GET http://127.0.0.1:8030/api/count_recipe HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+###
+GET http://127.0.0.1:8030/api/get_lunch_recipe HTTP/1.1
+Accept: application/json
+Content-Type: application/json

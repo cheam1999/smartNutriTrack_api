@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             // $table->unsignedInteger('age')->nullable();
             // $table->unsignedInteger('weight')->nullable();
             // $table->unsignedInteger('height')->nullable();
-            // $table->unsignedInteger('pregnancy_week')->nullable();
+            // $table->dateTime('DOD')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

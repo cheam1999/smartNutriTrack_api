@@ -70,10 +70,10 @@ class RecipeController extends Controller
 
     public function count_recipe()
     {
-        $breakfast_num = Recipe::where('recipe_meal' ,'=', 0)->count();
-        $lunch_num = Recipe::where('recipe_meal' ,'=', 1)->count();
-        $snacks_num = Recipe::where('recipe_meal' ,'=', 2)->count();
-        $dinner_num = Recipe::where('recipe_meal' ,'=', 3)->count();
+        $breakfast_num = Recipe::where('recipe_meal' ,'=', 0)->pluck('recipe_id');
+        $lunch_num = Recipe::where('recipe_meal' ,'=', 1)->pluck('recipe_id');
+        $snacks_num = Recipe::where('recipe_meal' ,'=', 2)->pluck('recipe_id');
+        $dinner_num = Recipe::where('recipe_meal' ,'=', 3)->pluck('recipe_id');
 
         $result = [$breakfast_num,$lunch_num,$snacks_num,$dinner_num];
 

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Food extends Model
 {
     use HasFactory;
@@ -24,19 +25,19 @@ class Food extends Model
         'calcium_100g',
     ];
 
-    public function scopeWithSelectProducts($query)
+    public function scopeWithSelectFood($query)
     {
         return $query->select(
             'id as id',
-            'food_code as foodCode',
-            'food_name as foodName',
-            'food_quantity as foodQuantity',
-            'food_serving_size as foodServingSize',
-            'energy_kcal_100g as energyKcal',
-            'carbohydrates_100g as carbohydrates',
-            'proteins_100g as proteins',
-            'sodium_100g as sodium',
-            'calcium_100g as calcium',
+            'food_code as food_code',
+            'food_name as food_name',
+            'food_quantity as food_quantity',
+            'food_serving_size as food_serving_size',
+            'energy_kcal_100g as energy_kcal_100g',
+            'carbohydrates_100g as carbohydrates_100g',
+            'proteins_100g as proteins_100g',
+            'sodium_100g as sodium_100g',
+            'calcium_100g as calcium_100g',
         );
     }
 }

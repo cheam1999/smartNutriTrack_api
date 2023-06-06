@@ -18,11 +18,29 @@ Content-Type: application/json
     "email": "test@test.com",
     "password": "12345678"
 }
+
 ### me
-POST http://127.0.0.1:8000/api/me HTTP/1.1
+POST http://127.0.0.1:8030/api/me HTTP/1.1
 Accept: application/json
 Content-Type: application/json
-Authorization: Bearer 21|UU0nm8BZcAxxHGdyzLG0cCh8YsLglR9AB993XWob
+Authorization: Bearer 20|qKOvlgYjrYeidgWWRYDK2r5fYZHWcqNoZjlZ5h4Y
+
+### logout
+POST http://127.0.0.1:8030/api/logout HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 11|7xZFeggHD6SjBNzUCIjvNMo16jEp3ZCNYqpItFHC
+
+### updateProfileDetails
+POST http://127.0.0.1:8030/api/updateProfileDetails HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 23|aJEbD09M7wrXrWzSp44DjFfqQDzsMV4IcYL1i4G2
+
+{
+    "email": "test2@test.com",
+    "name": "test3"
+}
 
 ### Get Barcode product
 GET http://127.0.0.1:8030/api/get_barcode_products/5449000000996 HTTP/1.1
@@ -30,7 +48,7 @@ Accept: application/json
 Content-Type: application/json
 
 ### Get all barcode product
-GET http://127.0.0.1:8000/api/get_all  HTTP/1.1
+GET http://127.0.0.1:8030/api/get_all_food  HTTP/1.1
 Accept: application/json
 Content-Type: application/json
 
@@ -38,10 +56,10 @@ Content-Type: application/json
 POST http://127.0.0.1:8030/api/save_meal HTTP/1.1
 Accept: application/json
 Content-Type: application/json
-Authorization: Bearer 26|hysv3CTWqSrkdEnK20vNyOjOqhhxohfxb04jjmcU
+Authorization: Bearer 18|18qfJYPDpDUrVc3RleLoQyukpQhTijqPx3dPlKRi
 
 {
-    "meal": "breakfast",
+    "meal": "lunch",
     "intake_serving_size": "500",
     "food_id": "3"
 }
@@ -97,11 +115,16 @@ Content-Type: application/json
 
 }
 
+### Get by recipe by id
+GET http://127.0.0.1:8030/api/get_recipe_by_id/2 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
 ### create user recipe
 POST http://127.0.0.1:8030/api/create_user_recipe HTTP/1.1
 Accept: application/json
 Content-Type: application/json
-Authorization: Bearer 1|M0o51lPkpM5RHrGNF7wtmKx7Oa48N0SKS0vldqYB
+Authorization: Bearer 15|ipa0l7wUNhoEt1pSzdVCUcK2D7meCsqjvw2iEpnq
 
 {
     "ur_breakfast": "1",
@@ -111,7 +134,19 @@ Authorization: Bearer 1|M0o51lPkpM5RHrGNF7wtmKx7Oa48N0SKS0vldqYB
 
 }
 
-###
+### Get by user id UR
+GET http://127.0.0.1:8030/api/get_by_userID HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 15|ipa0l7wUNhoEt1pSzdVCUcK2D7meCsqjvw2iEpnq
+
+### update ur
+POST http://127.0.0.1:8030/api/updateUr/ur_lunch HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 15|ipa0l7wUNhoEt1pSzdVCUcK2D7meCsqjvw2iEpnq
+
+### count recipe
 GET http://127.0.0.1:8030/api/count_recipe HTTP/1.1
 Accept: application/json
 Content-Type: application/json
@@ -120,3 +155,4 @@ Content-Type: application/json
 GET http://127.0.0.1:8030/api/get_lunch_recipe HTTP/1.1
 Accept: application/json
 Content-Type: application/json
+

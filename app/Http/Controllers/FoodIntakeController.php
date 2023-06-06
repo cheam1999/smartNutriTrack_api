@@ -46,14 +46,22 @@ class FoodIntakeController extends Controller
         
         # Check entry in daily_intake
         $daily_check = DailyIntake::where('d_intake_date', '=', Carbon::now()->format('Y-m-d'))-> exists();
+        
+        # Get 
+        $finalProportion = $fields['intake_serving_size']/100;
+        $finalCarb = $finalProportion * $food[0]->carbohydrates_100g;
+        $finalProtein = $finalProportion * $food[0]->proteins_100g;
+        $finalSodium = $finalProportion * $food[0]->sodium_100g;
+        $finalCalcium = $finalProportion * $food[0]->calcium_100g;
 
         if(!$daily_check){ # No daily entry
+            
             $daily_success = DailyIntake::create([
                 'd_energy_kcal' => $food[0]->energy_kcal_100g,
-                'd_carbohydrates' => $food[0]->carbohydrates_100g,
-                'd_proteins'  => $food[0]->proteins_100g,
-                'd_sodium'  => $food[0]->sodium_100g,
-                'd_calcium'  => $food[0]->calcium_100g,
+                'd_carbohydrates' => $finalCarb,
+                'd_proteins'  => $finalProtein,
+                'd_sodium'  => $finalSodium,
+                'd_calcium'  => $finalCalcium,
                 'd_intake_date' => Carbon::now()->format('Y-m-d'),
                 'users_id' => $user->id,
             ])->save();
@@ -63,10 +71,10 @@ class FoodIntakeController extends Controller
             ->get());
 
             $new_energy = $daily_old[0]->d_energy_kcal +  $food[0]->energy_kcal_100g;
-            $new_carb = $daily_old[0]->d_carbohydrates + $food[0]->carbohydrates_100g;
-            $new_protein = $daily_old[0]->d_proteins + $food[0]->proteins_100g;
-            $new_sodium = $daily_old[0]->d_sodium + $food[0]->sodium_100g;
-            $new_calcium = $daily_old[0]->d_calcium + $food[0]->calcium_100g;
+            $new_carb = $daily_old[0]->d_carbohydrates + $finalCarb;
+            $new_protein = $daily_old[0]->d_proteins + $finalProtein;
+            $new_sodium = $daily_old[0]->d_sodium + $finalSodium;
+            $new_calcium = $daily_old[0]->d_calcium + $finalCalcium;
 
             $daily_success = DailyIntake::where('users_id','=', $user->id)
             ->where('d_intake_date','=',Carbon::now()->format('Y-m-d'))
@@ -92,20 +100,20 @@ class FoodIntakeController extends Controller
 
             $weekly_success = WeeklyIntake::create([
                 'w_energy_kcal' => $food[0]->energy_kcal_100g,
-                'w_carbohydrates' => $food[0]->carbohydrates_100g,
-                'w_proteins'  => $food[0]->proteins_100g,
-                'w_sodium'  => $food[0]->sodium_100g,
-                'w_calcium'  => $food[0]->calcium_100g,
+                'w_carbohydrates' => $finalCarb,
+                'w_proteins'  => $finalProtein,
+                'w_sodium'  => $finalSodium,
+                'w_calcium'  => $finalCalcium,
                 'w_sun_date' => Carbon::now()->addDays($add_num_days)->format('Y-m-d'),
                 'users_id' => $user->id,
             ])->save();
         }else{ # entry exist for user
             if($today < $check_sun_date->w_sun_date ){ # in the same week, increment value
                 $new_energy_w = $check_sun_date->w_energy_kcal +  $food[0]->energy_kcal_100g;
-                $new_carb_w = $check_sun_date->w_carbohydrates + $food[0]->carbohydrates_100g;
-                $new_protein_w = $check_sun_date->w_proteins + $food[0]->proteins_100g;
-                $new_sodium_w = $check_sun_date->w_sodium + $food[0]->sodium_100g;
-                $new_calcium_w = $check_sun_date->w_calcium + $food[0]->calcium_100g;
+                $new_carb_w = $check_sun_date->w_carbohydrates + $finalCarb;
+                $new_protein_w = $check_sun_date->w_proteins + $finalProtein;
+                $new_sodium_w = $check_sun_date->w_sodium + $finalSodium;
+                $new_calcium_w = $check_sun_date->w_calcium + $finalCalcium;
 
                 $weekly_success = WeeklyIntake::where('users_id','=', $user->id)
                 ->where('w_sun_date','=',$check_sun_date->w_sun_date)
@@ -120,10 +128,10 @@ class FoodIntakeController extends Controller
             }else{ # is sunday, add new entry
                 $weekly_success = WeeklyIntake::create([
                     'w_energy_kcal' => $food[0]->energy_kcal_100g,
-                    'w_carbohydrates' => $food[0]->carbohydrates_100g,
-                    'w_proteins'  => $food[0]->proteins_100g,
-                    'w_sodium'  => $food[0]->sodium_100g,
-                    'w_calcium'  => $food[0]->calcium_100g,
+                    'w_carbohydrates' => $finalCarb,
+                    'w_proteins'  => $finalProtein,
+                    'w_sodium'  => $finalSodium,
+                    'w_calcium'  => $finalCalcium,
                     'w_sun_date' => Carbon::now()->addDays($add_num_days)->format('Y-m-d'),
                     'users_id' => $user->id,
                 ])->save();

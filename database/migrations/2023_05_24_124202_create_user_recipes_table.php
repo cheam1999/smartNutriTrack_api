@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedInteger('ur_dinner');
             $table->unsignedInteger('users_id');
             $table->foreign('users_id')->references('id')->on('users');
+            $table->dateTime('ur_date', $precision = 0);
             $table->timestamps();
         });
     }

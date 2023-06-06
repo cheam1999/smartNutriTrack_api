@@ -17,6 +17,7 @@ class User_recipe extends Model
         'ur_lunch',
         'ur_snacks',
         'ur_dinner',
+        'ur_date',
         'users_id'
     ];
 
@@ -29,6 +30,7 @@ class User_recipe extends Model
             'ur_lunch as ur_lunch',
             'ur_snacks as ur_snacks',
             'ur_dinner as ur_dinner',
+            'ur_date as ur_date'
         );
     }
 }

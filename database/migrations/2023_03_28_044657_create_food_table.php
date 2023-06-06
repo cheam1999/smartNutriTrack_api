@@ -15,9 +15,9 @@ return new class extends Migration
             $table->increments('id');
             $table->string('food_code') ->nullable();
             $table->string('food_name');
-            $table->double('food_quantity');
-            $table->double('food_serving_size') ->nullable();
-            $table->double('energy_kcal_100g') ->nullable();
+            $table->unsignedInteger('food_quantity');
+            $table->unsignedInteger('food_serving_size') ->nullable();
+            $table->unsignedInteger('energy_kcal_100g') ->nullable();
             $table->double('carbohydrates_100g') ->nullable();
             $table->double('proteins_100g') ->nullable();
             $table->double('sodium_100g') ->nullable();

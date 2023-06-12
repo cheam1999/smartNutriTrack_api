@@ -23,11 +23,16 @@ class Food extends Model
         'proteins_100g',
         'sodium_100g',
         'calcium_100g',
+        'food_verified',
+        'food_created_by',
+        'food_verified_by'
     ];
 
     public function scopeWithSelectFood($query)
     {
-        return $query->select(
+        return $query->leftJoin('users', 'food.food_created_by', '=', 'users.id')
+        ->leftJoin('users', 'food.food_verified_by', '=', 'users.id')
+        ->select(
             'id as id',
             'food_code as food_code',
             'food_name as food_name',
@@ -38,6 +43,12 @@ class Food extends Model
             'proteins_100g as proteins_100g',
             'sodium_100g as sodium_100g',
             'calcium_100g as calcium_100g',
+            'food_verified as food_verified',
+            'archived as archived'
         );
     }
+
+    
+
+
 }

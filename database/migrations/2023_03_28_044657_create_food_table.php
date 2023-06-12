@@ -22,6 +22,12 @@ return new class extends Migration
             $table->double('proteins_100g') ->nullable();
             $table->double('sodium_100g') ->nullable();
             $table->double('calcium_100g') ->nullable();
+            $table->unsignedInteger('food_verified');
+            $table->unsignedInteger('food_created_by');
+            $table->unsignedInteger('food_verified_by')->nullable();
+            $table->unsignedInteger('archived')->default(0);
+            $table->foreign('food_created_by')->references('id')->on('users');
+            $table->foreign('food_verified_by')->references('id')->on('users');
             $table->timestamps();
         });
     }

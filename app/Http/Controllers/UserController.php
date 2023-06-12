@@ -15,14 +15,16 @@ class UserController extends Controller
             'name' => 'required|string',
             'email' => 'required|string|unique:users,email',
             'password' => 'required|string|min:8',
+            'nutritionist' => 'required',
             
         ]);
 
         $newUser = User::create([
             'name' => $fields['name'],
             'email' => $fields['email'],
-            'password' => bcrypt($fields['password'],     
-            )
+            'password' => bcrypt($fields['password']),  
+            'nutritionist' => $fields['nutritionist']
+            
         ]);
 
         $user =  User::withSelectUser()
@@ -73,6 +75,7 @@ class UserController extends Controller
             "id" => $user->id,
             "name"=> $user->name,
             "email"=> $user->email,
+            "nutritionist"=> $user->nutritionist,
             "accessToken" => $token,
             "tokenType"=> "Bearer",
             "isLogin"=> true

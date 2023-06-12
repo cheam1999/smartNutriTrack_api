@@ -19,7 +19,8 @@ class Recipe extends Model
         'recipe_instructions',
         'recipe_source',
         'recipe_meal',
-        // 'recipe_video',
+        'recipe_created_by',
+        'archived'
     ];
 
     public function scopeWithSelectRecipe($query)
@@ -32,8 +33,9 @@ class Recipe extends Model
                 'recipe_ingredients as recipeIngredients',
                 'recipe_instructions as recipeInstructions',
                 'recipe_source as recipeSource',
-                'recipe_meal as recipe_meal'
-                // 'recipe_video as recipeVideo',
+                'recipe_meal as recipe_meal',
+                'recipe_created_by as recipe_created',
+                'archived as archived'
             );
     }
 }

@@ -4,8 +4,32 @@ Accept: application/json
 Content-Type: application/json
 
 {
+    "name": "nutritionist",
+    "email": "nutritionist@test.com",
+    "password": "12345678",
+    "nutritionist": "1"
+}
+
+### Sign up
+POST http://localhost:8030/api/register HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
     "name": "test",
     "email": "test@test.com",
+    "password": "12345678",
+    "nutritionist": "0"
+}
+
+
+### Sign in
+POST http://127.0.0.1:8030/api/login HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+    "email": "nutritionist@test.com",
     "password": "12345678"
 }
 
@@ -23,8 +47,7 @@ Content-Type: application/json
 POST http://127.0.0.1:8030/api/me HTTP/1.1
 Accept: application/json
 Content-Type: application/json
-Authorization: Bearer 20|qKOvlgYjrYeidgWWRYDK2r5fYZHWcqNoZjlZ5h4Y
-
+Authorization: Bearer 11|wDGYcRs5UQ1RUzGMky6JfijXOdl3ioxiTxhH2cNg
 ### logout
 POST http://127.0.0.1:8030/api/logout HTTP/1.1
 Accept: application/json
@@ -47,7 +70,7 @@ GET http://127.0.0.1:8030/api/get_barcode_products/5449000000996 HTTP/1.1
 Accept: application/json
 Content-Type: application/json
 
-### Get all barcode product
+### Get all food
 GET http://127.0.0.1:8030/api/get_all_food  HTTP/1.1
 Accept: application/json
 Content-Type: application/json
@@ -97,7 +120,7 @@ Accept: application/json
 Content-Type: application/json
 Authorization: Bearer 21|UU0nm8BZcAxxHGdyzLG0cCh8YsLglR9AB993XWob
 
-###
+### Get all recipe
 GET http://127.0.0.1:8030/api/get_recipe HTTP/1.1
 Accept: application/json
 Content-Type: application/json
@@ -106,25 +129,91 @@ Content-Type: application/json
 POST http://127.0.0.1:8030/api/create_recipe HTTP/1.1
 Accept: application/json
 Content-Type: application/json
+Authorization: Bearer 5|bKiKfwqctV3Svx1ngk4gIgWCOQCzeOiE8WAHNVxP
 
 {
     "recipe_name": "Pineapple Tarts",
+    "recipe_image": "https://snt-recipe-image.s3.ap-southeast-1.amazonaws.com/old-fashioned-oatmeal.jpg",
     "recipe_ingredients": "flour, corn starch, salt, icing sugar, unsalted butter, egg yolks, condensed milk, pineapple jam, sugar",
     "recipe_instructions": "If you are using canned pineapple slices, drain the pineapple slices and then squeeze the extra water/juice with your hands. Blend the canned pineapples until they are mushy, about 10 seconds. If you use fresh pineapples, remove the skin, cut into pieces and blend for 10 seconds.",
     "recipe_source": "https://rasamalaysia.com/recipe-pineapple-tarts/",
-
+    "recipe_meal": 2
 }
 
-### Get by recipe by id
-GET http://127.0.0.1:8030/api/get_recipe_by_id/2 HTTP/1.1
+### Update Recipe
+POST http://127.0.0.1:8030/api/update_recipe HTTP/1.1
 Accept: application/json
 Content-Type: application/json
+Authorization: Bearer 1|lpc8lsJj4z0SDeRHvXwfru4O5pQed1UJr9OfVG8a
+
+{
+    "recipe_id": "11",
+    "recipe_name": "Pineapple Tarts2",
+    "recipe_image": "https://snt-recipe-image.s3.ap-southeast-1.amazonaws.com/old-fashioned-oatmeal.jpg",
+    "recipe_ingredients": "flour, corn starch, salt, icing sugar, unsalted butter, egg yolks, condensed milk, pineapple jam, sugar",
+    "recipe_instructions": "If you are using canned pineapple slices, drain the pineapple slices and then squeeze the extra water/juice with your hands. Blend the canned pineapples until they are mushy, about 10 seconds. If you use fresh pineapples, remove the skin, cut into pieces and blend for 10 seconds.",
+    "recipe_source": "https://rasamalaysia.com/recipe-pineapple-tarts/",
+    "recipe_meal": 2
+}
+
+### Archived recipe
+POST http://127.0.0.1:8030/api/archived_recipe/12 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 3|H9S5CuMLrv1GD037QwznuTK0XVCjrDLDE45c6TB9
+
+### Create Ing
+POST http://127.0.0.1:8030/api/create_ingredients HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 5|bKiKfwqctV3Svx1ngk4gIgWCOQCzeOiE8WAHNVxP
+
+{
+    "ingredients_name": "Pineapple",
+    "recipe_id": "4",
+    "amount": "1",
+    "measure_name": "whole",
+    "cups": "0.5",
+    "comments": ""
+}
+
+### update Ing
+POST http://127.0.0.1:8030/api/update_ingredients HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 5|bKiKfwqctV3Svx1ngk4gIgWCOQCzeOiE8WAHNVxP
+
+{
+    "id": "28",
+    "ingredients_name": "pineapple",
+    "recipe_id": "4",
+    "amount": "1",
+    "measure_name": "whole",
+    "cups": "0.5",
+    "comments": ""
+}
+
+### Get by ing by id
+GET http://127.0.0.1:8030/api/get_ing_by_id/2 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+### Get all ing
+GET http://127.0.0.1:8030/api/get_ingredients HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+### Archived ing
+POST http://127.0.0.1:8030/api/archived_ingredients/12 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 3|NttQOX30OXDlc8ptPrStTAOHcLFetvlvd84GNLop
 
 ### create user recipe
 POST http://127.0.0.1:8030/api/create_user_recipe HTTP/1.1
 Accept: application/json
 Content-Type: application/json
-Authorization: Bearer 15|ipa0l7wUNhoEt1pSzdVCUcK2D7meCsqjvw2iEpnq
+Authorization: Bearer 4|PhOZPci91MW7K6PSJjN36r6yXIxEvXHd5ng7diFE
 
 {
     "ur_breakfast": "1",
@@ -151,8 +240,111 @@ GET http://127.0.0.1:8030/api/count_recipe HTTP/1.1
 Accept: application/json
 Content-Type: application/json
 
-###
+### get recipe
 GET http://127.0.0.1:8030/api/get_lunch_recipe HTTP/1.1
 Accept: application/json
 Content-Type: application/json
 
+### create new food by user
+POST http://127.0.0.1:8030/api/create_food HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 5|hNIWn37x5fAhYlI4Gb8L38t59VAdu1xc6MomiKcK
+
+{
+    "food_code": "",
+    "food_name": "banana2",
+    "food_quantity": "2",
+    "food_serving_size" : "2",
+    "energy_kcal_100g" : "20",
+    "carbohydrates_100g": "2.5",
+    "proteins_100g" : "1.3",
+    "sodium_100g" : "1.2",
+    "calcium_100g" : "0.5"
+}
+
+### get unverified food
+GET http://127.0.0.1:8030/api/get_unverified_food HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+### Verified food
+POST http://127.0.0.1:8030/api/verify_food/10 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 11|wDGYcRs5UQ1RUzGMky6JfijXOdl3ioxiTxhH2cNg
+
+### Get by recipe by id
+GET http://127.0.0.1:8030/api/get_food_by_id/9 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+### Archived food
+POST http://127.0.0.1:8030/api/archived_food/10 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 3|GojhhWnSiaM21SCZhirb97wPcCvzZwhsQK9R1K6A
+
+
+### get food by id
+GET  http://127.0.0.1:8030/api/get_food_by_id/3 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+### update food
+POST http://127.0.0.1:8030/api/update_food HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 12|fwxaJlvAI1arllziJiwc7oUC1xgm2v7ooP2bZelU
+
+{
+    "id": "12",
+    "food_code": "",
+    "food_name": "banana2",
+    "food_quantity": "2",
+    "food_serving_size" : "2",
+    "energy_kcal_100g" : "20",
+    "carbohydrates_100g": "2.5",
+    "proteins_100g" : "1.3",
+    "sodium_100g" : "1.2",
+    "calcium_100g" : "0.5"
+}
+
+### Generate Recipe
+POST  http://127.0.0.1:8030/api/generate_grocery HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+    "breakfast": "1",
+    "lunch": "3",
+    "snacks": "6",
+    "dinner": "10"
+
+}
+
+### process json
+POST http://127.0.0.1:8030/api/process_json HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 6|hUa9wcbtLy3QFmEQ7VupOKtVSQHFpdvv0SEwCa3R
+
+{
+    "list":
+        [[
+            "name": "toast",
+            "recipe_id": "2",
+            "amount": "2",
+            "cups": "0",
+            "measure_name": "whole"
+        ],
+        [
+            "name": "bagel",
+            "recipe_id": "2",
+            "amount": "2",
+            "cups": "0",
+            "measure_name": "teaspoons"
+        ]],
+     "listLength": "2"
+
+}

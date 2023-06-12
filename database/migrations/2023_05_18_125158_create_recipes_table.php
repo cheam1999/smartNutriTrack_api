@@ -21,7 +21,9 @@ return new class extends Migration
             $table->longText('recipe_instructions')->nullable();
             $table->string('recipe_source', 255)->nullable();
             $table->unsignedInteger('recipe_meal')->nullable();
-            // $table->string('recipe_video', 255)->nullable();
+            $table->unsignedInteger('recipe_created_by')->nullable();
+            $table->foreign('recipe_created_by')->references('id')->on('users');
+            $table->unsignedInteger('archived')->default(0);
             $table->timestamps();
         });
     }

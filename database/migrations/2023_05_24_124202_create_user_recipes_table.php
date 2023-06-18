@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_recipes', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->unsignedInteger('ur_breakfast');
             $table->unsignedInteger('ur_lunch');
             $table->unsignedInteger('ur_snacks');

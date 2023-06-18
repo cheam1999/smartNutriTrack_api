@@ -20,7 +20,7 @@ return new class extends Migration
             $table->double('d_calcium') ->nullable();
             $table->dateTime('d_intake_date', $precision = 0);
             
-            $table->unsignedInteger('users_id');
+             
             $table->foreign('users_id')->references('id')->on('users');
             $table->timestamps();
         });

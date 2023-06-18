@@ -16,7 +16,7 @@ return new class extends Migration
             $table->enum('meal', ['BREAKFAST', 'LUNCH', 'SNACKS', 'DINNER','SUPPER']);
             $table->double('intake_serving_size') ->nullable();
             $table->unsignedInteger('users_id');
-            $table->foreign('users_id')->references('id')->on('users');
+            $table->foreign('users_id') ;
             $table->unsignedInteger('food_id');
             $table->foreign('food_id')->references('id')->on('food');
             $table->dateTime('intake_date', $precision = 0);

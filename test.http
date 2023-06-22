@@ -34,6 +34,16 @@ Content-Type: application/json
 }
 
 ### Sign in
+POST http://127.0.0.1:8030/api/nutritionistLogin HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+    "email": "test@test.com",
+    "password": "12345678"
+}
+
+### Sign in
 POST http://127.0.0.1:8030/api/login HTTP/1.1
 Accept: application/json
 Content-Type: application/json
@@ -87,6 +97,16 @@ Authorization: Bearer 18|18qfJYPDpDUrVc3RleLoQyukpQhTijqPx3dPlKRi
     "food_id": "3"
 }
 
+### delete meal
+POST http://127.0.0.1:8030/api/delete_meal HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 48|WEiLevnHRrgi1iFzOlQfqm0CxMG1x7OTn0H9DCnt
+
+{
+    "food_intake_id": "19"
+}
+
 ### get current meals
 GET http://127.0.0.1:8030/api/get_current_meals HTTP/1.1
 Accept: application/json
@@ -99,7 +119,7 @@ Authorization: Bearer 26|hysv3CTWqSrkdEnK20vNyOjOqhhxohfxb04jjmcU
 GET http://127.0.0.1:8030/api/get_daily_summary HTTP/1.1
 Accept: application/json
 Content-Type: application/json
-Authorization: Bearer 21|UU0nm8BZcAxxHGdyzLG0cCh8YsLglR9AB993XWob
+Authorization: Bearer 45|NuqeN83q9YCiU04ezvq8z86Pm8CUgNV9w3T0rm43
 
 ### get current meals
 GET http://127.0.0.1:8030/api/get_current_meals HTTP/1.1
@@ -157,10 +177,10 @@ Authorization: Bearer 1|lpc8lsJj4z0SDeRHvXwfru4O5pQed1UJr9OfVG8a
 }
 
 ### Archived recipe
-POST http://127.0.0.1:8030/api/archived_recipe/12 HTTP/1.1
+POST http://127.0.0.1:8030/api/archived_recipe/14 HTTP/1.1
 Accept: application/json
 Content-Type: application/json
-Authorization: Bearer 3|H9S5CuMLrv1GD037QwznuTK0XVCjrDLDE45c6TB9
+Authorization: Bearer 66|JQkmYSyxGlJv7uLAJfe6SfsLXAcELOArCYnhFGZ2
 
 ### Create Ing
 POST http://127.0.0.1:8030/api/create_ingredients HTTP/1.1

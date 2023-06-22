@@ -14,6 +14,7 @@ use App\Http\Controllers\IngredientsController;
 //Public Routes
 Route::post('/register', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);
+Route::post('/nutritionistLogin', [UserController::class, 'nutritionistLogin']);
 
 // Food Controller
 Route::get('/get_barcode_products/{code}', [FoodController::class, 'get_barcode_products']);
@@ -62,6 +63,7 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::post('/save_meal', [FoodIntakeController::class, 'save_meal']);
     // retrieve all food intake
     Route::get('/get_current_meals', [FoodIntakeController::class, 'getCurrentMeals']);
+    Route::post('/delete_meal', [FoodIntakeController::class, 'delete_meal']);
 
     // Daily Intake Controller
     Route::get('/get_daily_summary', [DailyIntakeController::class, 'getDailySummary']);

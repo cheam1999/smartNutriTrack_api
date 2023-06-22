@@ -84,6 +84,48 @@ class UserController extends Controller
         return $result;
     }
 
+    public function nutritionistLogin(Request $request){
+        $fields = $request->validate([
+            'email' => 'required|string',
+            'password' => 'required|string'
+        ]);
+
+        $user = User::where('email', '=', $fields['email'])->firstOrFail();
+        
+        print(!$user);
+
+        if(!$user || !Hash::check($fields['password'],$user->password  )){
+            return response([
+                'message' => 'Unauthenticated'
+            ], 401);
+        }
+
+        if($user->nutritionist == 0){
+            return response([
+                'message' => 'Unauthenticated'
+            ], 401);
+        }
+
+
+        $token = $user->createToken('auth_token')->plainTextToken;
+
+        $user->accessToken = $token;
+        $user->tokenType = 'Bearer';
+        $user->isLogin = true;
+
+        $result = [[
+            "id" => $user->id,
+            "name"=> $user->name,
+            "email"=> $user->email,
+            "nutritionist"=> $user->nutritionist,
+            "accessToken" => $token,
+            "tokenType"=> "Bearer",
+            "isLogin"=> true
+        ]];
+
+        return $result;
+    }
+
     public function me(Request $request)
     {
 

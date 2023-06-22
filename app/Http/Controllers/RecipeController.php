@@ -123,6 +123,14 @@ class RecipeController extends Controller
         ->where('recipe_id', '=', $id)
         ->update(array('archived' => "1"));
 
-        return $archived_recipe;
+        $archived_ingredient = DB::table('ingredients')
+        ->where('recipe_id', '=', $id)
+        ->update(array('archived' => "1"));
+
+       if($archived_recipe && $archived_ingredient){
+        return true;
+       }else{
+        return false;
+       }
     }
 }

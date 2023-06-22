@@ -55,7 +55,7 @@ class IngredientsController extends Controller
                             $tempIng = strcmp($combine[$y]->ingredients_name,$ing[$z]['ingredients_name']); 
 
                             if($tempIng == 0){ // ingredient insert before
-                                $result = doubleval($ing[$z]['amount']) + doubleval($combine[$z]->amount);
+                                $result = doubleval($ing[$z]['amount']) + doubleval($combine[$y]->amount);
                                 $ing[$z]['amount'] = number_format($result);
                                 break;
                             }else{ // ingredient not insert before

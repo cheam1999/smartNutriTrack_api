@@ -8,6 +8,7 @@ use App\Models\WeeklyIntake;
 use App\Models\Food;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use DB;
 
 class FoodIntakeController extends Controller
 {
@@ -48,7 +49,7 @@ class FoodIntakeController extends Controller
         $daily_check = DailyIntake::where('d_intake_date', '=', Carbon::now()->format('Y-m-d'))-> exists();
         
         # Get 
-        $finalProportion = $fields['intake_serving_size']/100;
+        $finalProportion = $fields['intake_serving_size'];
         $finalCarb = $finalProportion * $food[0]->carbohydrates_100g;
         $finalProtein = $finalProportion * $food[0]->proteins_100g;
         $finalSodium = $finalProportion * $food[0]->sodium_100g;
@@ -143,5 +144,88 @@ class FoodIntakeController extends Controller
 
 
         return $newFoodIntake;
+    }
+
+    public function delete_meal(Request $request){
+
+        $daily_success = false;
+        $weekly_success = false;
+
+        $user = auth()->user();
+        $fields = $request->validate([
+            'food_intake_id' => 'required'
+        ]);
+
+      
+
+        # Get food nutrition details
+        $foodIntake = json_decode(FoodIntake::where('id','=', $fields['food_intake_id'])->get());
+        // return $foodIntake[0]->food_id;
+        $food = json_decode(Food::where('id','=', $foodIntake[0]->food_id)->get());
+        // print($foodIntake['food_id']);
+        // # Check entry in daily_intake
+        $daily_data = json_decode(DailyIntake::where('users_id','=',$foodIntake[0]->users_id)
+        ->where('d_intake_date', '=', Carbon::now()->format('Y-m-d'))
+        ->get());
+        
+        # Get 
+        $finalProportion = $foodIntake[0]->intake_serving_size;
+        $finalCarb = $finalProportion * $food[0]->carbohydrates_100g;
+        $finalProtein = $finalProportion * $food[0]->proteins_100g;
+        $finalSodium = $finalProportion * $food[0]->sodium_100g;
+        $finalCalcium = $finalProportion * $food[0]->calcium_100g;
+
+        if($daily_data != null){ # No daily entry
+            
+            $daily_success = DailyIntake::where('id', '=', $daily_data[0]->id)
+            ->update(array(
+                'd_energy_kcal' => $daily_data[0]->d_energy_kcal - $food[0]->energy_kcal_100g, 
+                'd_carbohydrates' => $daily_data[0]->d_carbohydrates - $finalCarb,
+                'd_proteins' => $daily_data[0]->d_proteins - $finalProtein,
+                'd_sodium' => $daily_data[0]->d_sodium - $finalSodium,
+                'd_calcium' => $daily_data[0]->d_calcium - $finalCalcium
+            ));
+        
+        }
+
+        // # Check entry in weekly intake
+        $check_sun_date =  json_decode(WeeklyIntake::where('users_id','=', $foodIntake[0]->users_id)
+        ->latest('w_sun_date')
+        ->first());
+
+        if($check_sun_date != null){ 
+            $weekly_success = WeeklyIntake::where('id', '=', $check_sun_date->id)
+                ->update(array(
+                    'w_energy_kcal' => $check_sun_date->w_energy_kcal - $food[0]->energy_kcal_100g, 
+                    'w_carbohydrates' => $check_sun_date->w_carbohydrates - $finalCarb,
+                    'w_proteins' => $check_sun_date->w_proteins - $finalProtein,
+                    'w_sodium' => $check_sun_date->w_sodium - $finalSodium,
+                    'w_calcium' => $check_sun_date->w_calcium - $finalCalcium
+                ));
+        
+        }
+
+        
+
+        print($daily_success);
+        print($weekly_success);
+
+        if($daily_success && $weekly_success){
+            # delete row from food intake
+            print("true");
+            $food_intake_success = DB::table('food_intakes')->where('id','=', $fields['food_intake_id'])->delete();
+            
+            if($food_intake_success){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        else{
+            print("false");
+            return false;
+        }
+
+        
     }
 }
